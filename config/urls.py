@@ -18,7 +18,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from core.views import home_view, LampDetailView, SensorDetailView, create_sensor_detail_view, update_lamp_status_view
+from core.views import (
+    home_view,
+    LampDetailView,
+    SensorDetailView,
+    create_sensor_detail_view,
+    update_lamp_status_view,
+    get_lamp_statu_view
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +34,7 @@ urlpatterns = [
     path('sensor/<int:pk>', SensorDetailView.as_view(), name='sensor-detail'),
     path('sensor/<sensor_id>/create', create_sensor_detail_view, name='sensor-detail-create'),
     path('lamp/<lamp_id>/update', update_lamp_status_view, name='lamp-detail-update'),
+    path('lamp/<lamp_id>/status', get_lamp_statu_view, name='lamp-detail-status'),
 ]
 
 if settings.DEBUG:
