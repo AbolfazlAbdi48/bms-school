@@ -41,6 +41,7 @@ def create_sensor_detail_view(request, sensor_id):
         return HttpResponse({"status": "OK"})
 
 
+@csrf_exempt
 def update_lamp_status_view(request, lamp_id):
     lamp = get_object_or_404(Lamp, id=lamp_id)
 
