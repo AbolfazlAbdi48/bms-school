@@ -26,7 +26,7 @@ urlpatterns = [
     path('lamp/<int:pk>', LampDetailView.as_view(), name='lamp-detail'),
     path('sensor/<int:pk>', SensorDetailView.as_view(), name='sensor-detail'),
     path('sensor/<sensor_id>/create', create_sensor_detail_view, name='sensor-detail-create'),
-    path('sensor/<lamp_id>/update', update_lamp_status_view, name='lamp-detail-update'),
+    path('lamp/<lamp_id>/update', update_lamp_status_view, name='lamp-detail-update'),
 ]
 
 if settings.DEBUG:
