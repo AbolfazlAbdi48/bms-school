@@ -60,5 +60,5 @@ def update_lamp_status_view(request, lamp_id):
 
 @csrf_exempt
 def get_lamp_statu_view(request, lamp_id):
-    lamp = get_object_or_404(Lamp, lamp_id)
+    lamp = get_object_or_404(Lamp, id=lamp_id)
     return HttpResponse({lamp.status: "OK"})
