@@ -1,0 +1,47 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    مدیریت لامپ {{ object.name }}
+{% endblock %}
+
+{% block content %}
+    <main id="main">
+        <section id="blog" class="blog">
+            <div class="container aos-init aos-animate" data-aos="fade-up">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-primary">
+                            <h5>{{ message }}</h5>
+                        </div>
+                    {% endfor %}
+
+                {% endif %}
+                <div class="row g-5">
+
+                    <div class="col-lg-12">
+
+                        <div class="sidebar">
+                            <h2 class="title">{{ object.name }}</h2>
+                            <p class="my-4">وضعیت فعلی: {{ object.get_status_display }}</p>
+                            <a href="{% url 'lamp-detail-update' object.id %}" class="btn btn-outline-success">تغییر وضعیت</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+
+        <div class="container mt-4">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Parsa, Peyman, Abolfazl</span></strong>. All Rights Reserved
+            </div>
+        </div>
+
+    </footer><!-- End Footer -->
+    <!-- End Footer -->
+{% endblock %}

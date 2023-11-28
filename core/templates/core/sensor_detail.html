@@ -1,0 +1,57 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    مدیریت {{ object.name }}
+{% endblock %}
+
+{% block content %}
+    <main id="main">
+        <section id="blog" class="blog">
+            <div class="container">
+                <div class="row">
+                    <div class="sidebar col-12 mt-5">
+                        <h3>{{ object.name }}</h3>
+                        <h5>توضیحات: {{ object.description }}</h5>
+
+                        <div class="bg-white rounded p-4">
+                            <h5 class="my-3">مقادیر ارسال شده</h5>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">مقدار</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in object.sensordetail_set.all %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }}</th>
+                                        <td>{{ item.value }} {{ object.quantity }}</td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        <div class="alert alert-primary">
+                            API Endpoint: {% url 'sensor-detail-create' object.id %}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+
+        <div class="container mt-4">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Parsa, Peyman, Abolfazl</span></strong>. All Rights Reserved
+            </div>
+        </div>
+
+    </footer><!-- End Footer -->
+    <!-- End Footer -->
+{% endblock %}

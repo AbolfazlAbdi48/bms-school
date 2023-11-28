@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "Vazir";
+  src: url("../fonts/Vazir.eot");
+  src: url("../fonts/Vazir.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/Vazir.woff2") format("woff2"),
+    url("../fonts/Vazir.woff") format("woff"),
+    url("../fonts/Vazir.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Vazir-fd";
+  src: url("../fonts/Vazir-FD-WOL.eot");
+  src: url("../fonts/Vazir-FD-WOL.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/Vazir-FD-WOL.woff2") format("woff2"),
+    url("../fonts/Vazir-FD-WOL.woff") format("woff"),
+    url("../fonts/Vazir-FD-WOL.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Vazir-bold-fd";
+  src: url("../fonts/Vazir-BOLD-FD-WOL.eot");
+  src: url("../fonts/Vazir-BOLD-FD-WOL.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/Vazir-BOLD-FD-WOL.woff2") format("woff2"),
+    url("../fonts/Vazir-BOLD-FD-WOL.woff") format("woff"),
+    url("../fonts/Vazir-BOLD-FD-WOL.ttf") format("truetype");
+}
+
+body {
+  font-family: "Vazir-fd", "Vazir" !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  font-family: "Vazir-fd", "Vazir" !important;
+}
