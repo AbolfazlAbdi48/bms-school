@@ -43,16 +43,15 @@ def create_sensor_detail_view(request, sensor_id):
 
 @csrf_exempt
 def update_lamp_status_view(request, lamp_id):
-    lamp = get_object_or_404(Lamp, id=lamp_id)
-
-    if lamp.status == "0":
-        lamp.status = "1"
-        # messages.success(request, f"وضعیت {lamp.name} به ON تغییر پیدا کرد")
-    else:
-        lamp.status = "0"
-        # messages.success(request, f"وضعیت {lamp.name} به OFF تغییر پیدا کرد")
-    lamp.save()
-
     if request.method == "POST":
+        lamp = get_object_or_404(Lamp, id=lamp_id)
+
+        if lamp.status == "0":
+            lamp.status = "1"
+            # messages.success(request, f"وضعیت {lamp.name} به ON تغییر پیدا کرد")
+        else:
+            lamp.status = "0"
+            # messages.success(request, f"وضعیت {lamp.name} به OFF تغییر پیدا کرد")
+        lamp.save()
         return HttpResponse({lamp.status: "OK"})
-    return redirect("lamp-detail", pk=lamp_id)
+    # return redirect("lamp-detail", pk=lamp_id)
