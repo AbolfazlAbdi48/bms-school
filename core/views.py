@@ -54,5 +54,5 @@ def update_lamp_status_view(request, lamp_id):
     lamp.save()
 
     if request.method == "POST":
-        return HttpResponse({"status": "OK"})
+        return HttpResponse({lamp.status: "OK"})
     return redirect("lamp-detail", pk=lamp_id)
