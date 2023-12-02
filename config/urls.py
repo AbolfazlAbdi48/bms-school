@@ -18,23 +18,26 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth.views import LoginView
 from core.views import (
     home_view,
     LampDetailView,
     SensorDetailView,
     create_sensor_detail_view,
     update_lamp_status_view,
-    get_lamp_statu_view
+    get_lamp_statu_view, SignUpView
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', LoginView.as_view(), name='login'),
+    path('register/', SignUpView.as_view()),
     path('', home_view),
     path('lamp/<int:pk>', LampDetailView.as_view(), name='lamp-detail'),
     path('sensor/<int:pk>', SensorDetailView.as_view(), name='sensor-detail'),
     path('sensor/<sensor_id>/create', create_sensor_detail_view, name='sensor-detail-create'),
-    path('lamp/<lamp_id>/update', update_lamp_status_view, name='lamp-detail-update'),
-    path('lamp/<lamp_id>/status', get_lamp_statu_view, name='lamp-detail-status'),
+    path('lamp/<lamp_id>/update/<token>', update_lamp_status_view, name='lamp-detail-update'),
+    path('lamp/<lamp_id>/status/<token>', get_lamp_statu_view, name='lamp-detail-status'),
 ]
 
 if settings.DEBUG:

@@ -23,7 +23,7 @@
                         <div class="sidebar">
                             <h2 class="title">{{ object.name }}</h2>
                             <p class="my-4">وضعیت فعلی: {{ object.get_status_display }}</p>
-                            <a href="{% url 'lamp-detail-update' object.id %}" class="btn btn-outline-success">تغییر وضعیت</a>
+                            <a href="{% url 'lamp-detail-update' object.id request.user.usertoken.token %}" class="btn btn-outline-success">تغییر وضعیت</a>
                         </div>
 
                     </div>

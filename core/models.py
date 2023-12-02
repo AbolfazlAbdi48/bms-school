@@ -1,3 +1,6 @@
+import uuid
+
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -6,6 +9,7 @@ class Sensor(models.Model):
     name = models.CharField(max_length=255, verbose_name='نام سنسور')
     description = models.CharField(max_length=255, verbose_name='جزئیات سنسور')
     quantity = models.CharField(max_length=100, default="درجه", verbose_name='واحد')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, verbose_name='کاربر')
 
     def __str__(self):
         return self.name
@@ -30,6 +34,15 @@ class Lamp(models.Model):
     )
     name = models.CharField(max_length=255, verbose_name='نام لامپ')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='0', verbose_name='وضعیت')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, verbose_name='کاربر')
 
     def __str__(self):
         return f"{self.name} - {self.status}"
+
+
+class UserToken(models.Model):
+    user = models.OneToOneField(User, on_delete=models.PROTECT, verbose_name='کاربر')
+    token = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    # def __str__(self):
+    #     return self.user.get_full_name()
