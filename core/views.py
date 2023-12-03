@@ -38,7 +38,6 @@ class SensorDetailView(LoginRequiredMixin, DetailView):
     template_name = 'core/sensor_detail.html'
 
 
-@login_required
 @csrf_exempt
 def create_sensor_detail_view(request, sensor_id):
     if request.method == "POST":
@@ -56,7 +55,6 @@ def create_sensor_detail_view(request, sensor_id):
             return JsonResponse({"status": "NOT VALID"})
 
 
-@login_required
 @csrf_exempt
 def update_lamp_status_view(request, lamp_id, token):
     lamp = get_object_or_404(Lamp, id=lamp_id, user__usertoken__token=token)
@@ -74,7 +72,6 @@ def update_lamp_status_view(request, lamp_id, token):
     return redirect("lamp-detail", pk=lamp_id)
 
 
-@login_required
 @csrf_exempt
 def get_lamp_statu_view(request, lamp_id, token):
     lamp = get_object_or_404(Lamp, id=lamp_id, user__usertoken__token=token)
