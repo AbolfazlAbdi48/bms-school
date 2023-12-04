@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -15,6 +16,12 @@ from core.models import Sensor, Lamp, SensorDetail, UserToken
 
 
 # Create your views here.
+class UserRegisterForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('username', 'password1', 'password2', 'first_name')
+
+
 @login_required
 def home_view(request):
     sensors = Sensor.objects.filter(user=request.user)
@@ -71,13 +78,13 @@ def create_sensor_detail_view(request, sensor_id):
         json_data = json.loads(request.body)
         value = json_data["value"]
         try:
-            token = json_data["token"]
+            token = json_data["API"]
             sensor = get_object_or_404(Sensor, id=sensor_id, user__usertoken__token=token)
             sensor_detail = SensorDetail.objects.create(
                 sensor=sensor,
                 value=value[1],
             )
-            return JsonResponse({"status": "OK", "token": token})
+            return JsonResponse({"status": "OK", "API": token, "phone": request.user.first_name})
         except:
             return JsonResponse({"status": "NOT VALID"})
 
@@ -95,18 +102,18 @@ def update_lamp_status_view(request, lamp_id, token):
     lamp.save()
 
     if request.method == "POST":
-        return JsonResponse({"status": lamp.get_status_display(), "token": token})
+        return JsonResponse({"status": lamp.get_status_display(), "API": token, "phone": request.user.first_name})
     return redirect("lamp-detail", pk=lamp_id)
 
 
 @csrf_exempt
 def get_lamp_statu_view(request, lamp_id, token):
     lamp = get_object_or_404(Lamp, id=lamp_id, user__usertoken__token=token)
-    return JsonResponse({"status": lamp.get_status_display(), "token": token})
+    return JsonResponse({"status": lamp.get_status_display(), "API": token, "phone": request.user.first_name})
 
 
 class SignUpView(SuccessMessageMixin, CreateView):
     template_name = 'registration/register.html'
     success_url = reverse_lazy('login')
-    form_class = UserCreationForm
+    form_class = UserRegisterForm
     success_message = "حساب کاربری با موفقیت ساخته شد، لطفا وارد حساب شوید."

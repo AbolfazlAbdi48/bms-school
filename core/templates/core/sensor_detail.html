@@ -33,9 +33,9 @@
                                 </tbody>
                             </table>
 
-                        <div class="alert alert-primary">
-                            API Endpoint: {% url 'sensor-detail-create' object.id %}
-                        </div>
+                            <div class="alert alert-primary">
+                                API Token: {{ request.user.usertoken.token }}
+                            </div>
                         </div>
                     </div>
                 </div>
