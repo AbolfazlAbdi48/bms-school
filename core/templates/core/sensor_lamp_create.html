@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    ایجاد آیتم جدید
+{% endblock %}
+
+{% block content %}
+    <main id="main">
+        <div class="container mt-5 pt-5">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            ساخت آیتم جدید
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="btn btn-outline-primary">ساخت</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

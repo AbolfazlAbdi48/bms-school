@@ -25,14 +25,19 @@ from core.views import (
     SensorDetailView,
     create_sensor_detail_view,
     update_lamp_status_view,
-    get_lamp_statu_view, SignUpView
+    get_lamp_statu_view,
+    SignUpView,
+    SensorCreateView,
+    LampCreateView
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(), name='login'),
     path('register/', SignUpView.as_view()),
-    path('', home_view),
+    path('', home_view, name='home'),
+    path('lamp/create', LampCreateView.as_view(), name='lamp-create'),
+    path('sensor/create', SensorCreateView.as_view(), name='sensor-create'),
     path('lamp/<int:pk>', LampDetailView.as_view(), name='lamp-detail'),
     path('sensor/<int:pk>', SensorDetailView.as_view(), name='sensor-detail'),
     path('sensor/<sensor_id>/create', create_sensor_detail_view, name='sensor-detail-create'),
